@@ -1,0 +1,770 @@
+/* ============================================================
+   BRANDS/SCORE-BRASIL/CSS/THEME.CSS
+   Estilos específicos de la presentación Score Brasil 2026.
+   Sobreescribe variables de base.css y define componentes
+   propios de cada sección.
+   ============================================================ */
+
+/* ── Override de variables (si se necesitara personalizar) ── */
+/* Las variables por defecto en base.css ya usan la paleta
+   Score Energy, así que aquí solo se añaden las específicas
+   de esta presentación.                                       */
+:root {
+  --hero-glow:      rgba(255, 215, 0, 0.12);
+  --europa-bg:      #0A0A1A;
+  --verde-gorilla:  #2D5A27;
+  --azul-zero:      #1A3A5C;
+  --naranja-innov:  #FF6B00;
+}
+
+/* ============================================================
+   SECCIÓN 1 — HERO
+   ============================================================ */
+#hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Gradiente radial dorado de fondo */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%,
+    var(--hero-glow) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Canvas de partículas */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  color: var(--color-text);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.hero__title--accent {
+  color: var(--color-accent);
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.35);
+}
+
+.hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  color: var(--color-text-muted);
+  max-width: 520px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   SECCIÓN 2 — GRÁFICO DE CRECIMIENTO
+   ============================================================ */
+#crecimiento {
+  background: var(--color-bg-section);
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: clamp(32px, 5vw, 56px) auto 0;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: clamp(20px, 4vw, 40px);
+  box-shadow: 0 0 48px rgba(255, 215, 0, 0.05);
+}
+
+.chart-canvas-container {
+  position: relative;
+  height: clamp(220px, 35vw, 380px);
+  width: 100%;
+}
+
+/* Hitos debajo del gráfico */
+.hitos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 2vw, 20px);
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.hito-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: clamp(16px, 2.5vw, 24px);
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hito-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.hito-card__year {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.hito-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.hito-card__desc {
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* ============================================================
+   SECCIÓN 3 — CREDENCIALES DE PODER
+   ============================================================ */
+#credenciales {
+  background: var(--color-bg);
+}
+
+.credenciales-header .text-red {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   SECCIÓN 4 — ADN EUROPEO
+   ============================================================ */
+#adn {
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--europa-bg) 50%, var(--color-bg) 100%);
+}
+
+.adn-bloques {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(36px, 5vw, 60px);
+}
+
+.adn-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(24px, 3vw, 36px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 215, 0, 0.12);
+  border-radius: var(--border-radius);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.adn-bloque:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  background: rgba(255, 215, 0, 0.04);
+}
+
+.adn-icon {
+  width: clamp(44px, 5vw, 60px);
+  height: clamp(44px, 5vw, 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.adn-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-accent);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.adn-bloque__label {
+  font-family: var(--font-display);
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+  letter-spacing: 0.2em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+
+.adn-bloque__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+.adn-bloque__text {
+  font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   SECCIÓN 5 — MERCADO BRASIL
+   ============================================================ */
+#mercado {
+  background: var(--color-bg-section);
+}
+
+.mercado-bloques {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+.mercado-bloque {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: clamp(24px, 3vw, 36px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.mercado-bloque:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.mercado-bloque__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.mercado-bloque__sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+/* Barras comparativas de consumo */
+.consumo-comparativo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.consumo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.consumo-row__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  width: 55px;
+  flex-shrink: 0;
+}
+
+.consumo-row__bar-wrap {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.consumo-row__bar {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--color-accent);
+  transition: width 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 0%;
+}
+
+.consumo-row__bar--brasil {
+  background: rgba(255, 215, 0, 0.45);
+}
+
+.consumo-row__val {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-text);
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.consumo-nota {
+  font-size: clamp(0.78rem, 1.2vw, 0.88rem);
+  color: var(--color-text-muted);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SECCIÓN 6 — PRODUCCIÓN LOCAL
+   ============================================================ */
+#produccion {
+  background: var(--color-bg);
+}
+
+.produccion-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+/* Mapa SVG de Brasil */
+.brasil-map-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#brasil-map {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  opacity: 0.85;
+}
+
+#brasil-map .map-fill {
+  fill: #1a1a1a;
+  stroke: var(--color-accent);
+  stroke-width: 1.2;
+}
+
+#sp-dot-outer {
+  fill: rgba(255, 215, 0, 0.25);
+  animation: sp-pulse 2.2s ease-in-out infinite;
+}
+
+#sp-dot-inner {
+  fill: var(--color-accent);
+  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
+  animation: sp-pulse-inner 2.2s ease-in-out infinite;
+}
+
+#sp-label {
+  fill: var(--color-accent);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@keyframes sp-pulse {
+  0%, 100% { r: 14; opacity: 0.6; }
+  50%       { r: 22; opacity: 0.2; }
+}
+
+@keyframes sp-pulse-inner {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* Pilares de producción */
+.pilares-grid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+.pilar-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  padding: clamp(18px, 3vw, 28px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pilar-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 24px rgba(255, 215, 0, 0.1);
+}
+
+.pilar-card--red {
+  border-left-color: var(--color-highlight);
+}
+
+.pilar-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.pilar-card__text {
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.pilar-card__red-tag {
+  color: var(--color-highlight);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ============================================================
+   SECCIÓN 7 — PORTAFOLIO
+   ============================================================ */
+#portafolio {
+  background: var(--color-bg-section);
+}
+
+.portafolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+.producto-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Mockup visual de lata CSS */
+.lata-mockup {
+  height: clamp(160px, 20vw, 240px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.lata-mockup__can {
+  width: clamp(70px, 8vw, 100px);
+  height: clamp(130px, 16vw, 190px);
+  border-radius: 14px / 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -8px 0 20px rgba(0,0,0,0.5),
+              inset 6px 0 16px rgba(255,255,255,0.08),
+              0 8px 32px rgba(0,0,0,0.5);
+}
+
+.lata-mockup__can::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  height: 30%;
+  background: rgba(255,255,255,0.07);
+  border-radius: 8px 8px 0 0;
+  pointer-events: none;
+}
+
+.lata-mockup__name {
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  padding: 0 8px;
+  z-index: 1;
+  position: relative;
+}
+
+/* Gorilla */
+.lata-mockup--gorilla .lata-mockup__can {
+  background: linear-gradient(160deg, #3a7a30 0%, #1a3d16 50%, #0a0a0a 100%);
+}
+
+/* Zero */
+.lata-mockup--zero .lata-mockup__can {
+  background: linear-gradient(160deg, #cce8f4 0%, #2a5f8c 50%, #0a0f1c 100%);
+}
+.lata-mockup--zero .lata-mockup__name {
+  color: rgba(0, 30, 60, 0.95);
+}
+
+/* Innovacion */
+.lata-mockup--innov .lata-mockup__can {
+  background: linear-gradient(160deg, #FF6B00 0%, #d63384 50%, #3a0020 100%);
+}
+
+.producto-card__body {
+  padding: clamp(20px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.producto-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--color-text);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.producto-card__sub {
+  font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+}
+
+.producto-card__desc {
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.producto-card__footer {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+/* Borde top de color del producto */
+.producto-card--gorilla { border-top: 3px solid var(--verde-gorilla); }
+.producto-card--gorilla:hover { border-color: var(--verde-gorilla); }
+
+.producto-card--zero    { border-top: 3px solid var(--azul-zero); }
+.producto-card--zero:hover { border-color: var(--azul-zero); }
+
+.producto-card--innov   { border-top: 3px solid var(--naranja-innov); }
+.producto-card--innov:hover { border-color: var(--naranja-innov); }
+
+/* ============================================================
+   SECCIÓN 8 — CIERRE
+   ============================================================ */
+#cierre {
+  background: var(--color-bg);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#cierre::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%,
+    rgba(255, 215, 0, 0.07) 0%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.cierre__content {
+  position: relative;
+  z-index: 2;
+  max-width: 820px;
+  padding: 0 clamp(20px, 5vw, 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.cierre__frase {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  color: var(--color-text);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cierre__frase--accent {
+  color: var(--color-accent);
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.cierre__cta {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.8vw, 1.15rem);
+  color: var(--color-text);
+  max-width: 520px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.cierre__divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.cierre__contacto {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 24px);
+  font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+  color: var(--color-text-muted);
+}
+
+.cierre__contacto span {
+  white-space: nowrap;
+}
+
+.cierre__contacto .sep {
+  color: var(--color-accent);
+  opacity: 0.4;
+}
+
+.cierre__footer {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: clamp(20px, 3vw, 40px);
+}
+
+/* ============================================================
+   ESTILOS JS FADE-IN (usados por GSAP y core.js)
+   ============================================================ */
+.js-fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-stagger > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js-stagger > *.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   RESPONSIVE GLOBAL SCORE BRASIL
+   ============================================================ */
+@media (max-width: 1024px) {
+  .produccion-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .brasil-map-wrap {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .adn-bloques,
+  .mercado-bloques,
+  .portafolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hitos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cierre__frase {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+  }
+
+  .cierre__contacto {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cierre__contacto .sep {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .lata-mockup {
+    height: 180px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .js-fade-in,
+  .js-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  #sp-dot-outer,
+  #sp-dot-inner {
+    animation: none !important;
+  }
+}

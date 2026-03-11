@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Score Energy Drink — Plataforma de presentaciones interactivas." />
+  <title>Score Energy Drink — Presentaciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/shared/css/base.css" />
+
+  <style>
+    /* ── Landing styles ─────────────────────────────────── */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg);
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 60px);
+    }
+
+    /* Fondo con gradiente radial sutil */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%,
+        rgba(255, 215, 0, 0.04) 0%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header Logo ───────────────────────────────────── */
+    .landing-header {
+      text-align: center;
+      margin-bottom: clamp(40px, 8vw, 80px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .landing-logo {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: var(--color-text);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .landing-logo span {
+      color: var(--color-accent);
+    }
+
+    .landing-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+      color: var(--color-text-muted);
+      margin-top: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── Grid de Presentaciones ────────────────────────── */
+    .presentations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+      gap: clamp(20px, 3vw, 32px);
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Card de Presentación ──────────────────────────── */
+    .pres-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      padding: clamp(28px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease,
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .pres-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%,
+        rgba(255, 215, 0, 0.06) 0%,
+        transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .pres-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-accent);
+      box-shadow: 0 16px 48px rgba(255, 215, 0, 0.15);
+    }
+
+    .pres-card:hover::before {
+      opacity: 1;
+    }
+
+    .pres-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .pres-card__flag {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .pres-card__badge-wrap {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pres-card__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--color-text);
+      line-height: 1.05;
+      letter-spacing: 0.03em;
+    }
+
+    .pres-card__title span {
+      color: var(--color-accent);
+    }
+
+    .pres-card__desc {
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .pres-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .pres-card__cta {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .pres-card__cta::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .pres-card:hover .pres-card__cta::after {
+      transform: translateX(4px);
+    }
+
+    .pres-card__year {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      margin-left: auto;
+    }
+
+    /* ── Card vacía (placeholder futuras) ──────────────── */
+    .pres-card--coming {
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .pres-card--coming .pres-card__title {
+      color: var(--color-text-muted);
+    }
+
+    /* ── Footer ────────────────────────────────────────── */
+    .landing-footer {
+      margin-top: clamp(40px, 8vw, 80px);
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Fade-in de entrada ────────────────────────────── */
+    .landing-header,
+    .pres-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: landing-fade-in 0.6s ease forwards;
+    }
+
+    .pres-card:nth-child(1) { animation-delay: 0.2s; }
+    .pres-card:nth-child(2) { animation-delay: 0.35s; }
+    .pres-card:nth-child(3) { animation-delay: 0.5s; }
+
+    .landing-header { animation-delay: 0.05s; }
+
+    @keyframes landing-fade-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .landing-header,
+      .pres-card {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="landing-header">
+    <div class="landing-logo">SCORE <span>ENERGY</span> DRINK</div>
+    <p class="landing-subtitle">Plataforma de presentaciones interactivas · 2026</p>
+  </header>
+
+  <!-- Grid de presentaciones -->
+  <main class="presentations-grid" role="main">
+
+    <!-- ── Card: Score Brasil ─────────────────────────── -->
+    <a href="/brands/score-brasil/" class="pres-card" aria-label="Ver presentación Score Brasil 2026">
+      <div class="pres-card__header">
+        <span class="pres-card__flag" aria-hidden="true">🇧🇷</span>
+        <div class="pres-card__badge-wrap">
+          <span class="badge badge--new">NUEVO</span>
+        </div>
+      </div>
+      <h2 class="pres-card__title">SCORE<br /><span>BRASIL</span></h2>
+      <p class="pres-card__desc">
+        Pitch de expansión a Brasil 2026. Trayectoria de crecimiento,
+        oportunidad de mercado y estrategia de producción local en São Paulo.
+      </p>
+      <div class="pres-card__meta">
+        <span class="pres-card__cta">Ver presentación</span>
+        <span class="pres-card__year">2026</span>
+      </div>
+    </a>
+
+    <!-- ── Card: Score Perú (placeholder) ─────────────── -->
+    <div class="pres-card pres-card--coming" aria-hidden="true">
+      <div class="pres-card__header">
+        <span class="pres-card__flag">🇵🇪</span>
+      </div>
+      <h2 class="pres-card__title">SCORE PERÚ</h2>
+      <p class="pres-card__desc">
+        Próximamente — Duplica la carpeta /brands/score-brasil/ y
+        actualiza los datos para agregar esta presentación.
+      </p>
+      <div class="pres-card__meta">
+        <span class="pres-card__cta" style="color: var(--color-text-muted);">Próximamente</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <p>© 2026 Score Energy Drink · <a href="https://scoreenergydrink.com" style="color: var(--color-accent);">scoreenergydrink.com</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Score Energy Drink — El Fenómeno del Cono Sur llega a Brasil 2026. Pitch de expansión interactivo." />
+  <title>Score Energy Brasil 2026 — El Fenómeno del Cono Sur</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Estilos base y tema -->
+  <link rel="stylesheet" href="/shared/css/base.css" />
+  <link rel="stylesheet" href="/brands/score-brasil/css/theme.css" />
+</head>
+<body>
+
+  <!-- ── Barra de progreso ──────────────────────────────── -->
+  <div id="progress-bar" role="progressbar" aria-label="Progreso de lectura"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 1 — HERO / PORTADA
+       ══════════════════════════════════════════════════════ -->
+  <section id="hero" class="section" aria-label="Portada">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero__content">
+      <span class="hero__eyebrow eyebrow">Score Energy Drink</span>
+
+      <h1 class="hero__title">
+        El Fenómeno<br />
+        del Cono Sur
+      </h1>
+      <h2 class="hero__title hero__title--accent">
+        Llega a Brasil
+      </h2>
+
+      <p class="hero__subtitle">
+        Liderazgo probado, calidad europea<br />
+        y producción local en São Paulo
+      </p>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-indicator__dot"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 2 — LA CURVA DE LA VICTORIA
+       ══════════════════════════════════════════════════════ -->
+  <section id="crecimiento" class="section section--alt" aria-label="Trayectoria de crecimiento">
+    <div class="container">
+
+      <div class="section__header js-fade-in">
+        <span class="eyebrow">La trayectoria que habla por sí sola</span>
+        <h2>La "Curva de<br /><span class="text-accent">la Victoria"</span></h2>
+        <div class="divider-gold"></div>
+        <p>De 1 millón a 130 millones: 14 años de crecimiento sostenido</p>
+      </div>
+
+      <!-- Gráfico Chart.js -->
+      <div class="chart-wrapper js-fade-in">
+        <div class="chart-canvas-container">
+          <canvas id="growth-chart" aria-label="Gráfico de crecimiento de ventas Score Energy 2012–2026"></canvas>
+        </div>
+      </div>
+
+      <!-- Hitos debajo del gráfico -->
+      <div class="hitos-grid js-stagger" style="margin-top: clamp(28px, 4vw, 48px);">
+        <div class="hito-card">
+          <span class="hito-card__year">2020 – 2021</span>
+          <div class="hito-card__title">De 40M a 100M<br />en 12 meses</div>
+          <p class="hito-card__desc">El mayor salto en la historia de la marca.</p>
+        </div>
+        <div class="hito-card">
+          <span class="hito-card__year">2025</span>
+          <div class="hito-card__title">Récord histórico —<br />114M latas</div>
+          <p class="hito-card__desc">El año más exitoso desde la fundación.</p>
+        </div>
+        <div class="hito-card">
+          <span class="hito-card__year">2026</span>
+          <div class="hito-card__title">Objetivo —<br />130M unidades</div>
+          <p class="hito-card__desc">Meta con expansión regional a Brasil.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 3 — CREDENCIALES DE PODER
+       ══════════════════════════════════════════════════════ -->
+  <section id="credenciales" class="section" aria-label="Credenciales y KPIs">
+    <div class="container">
+
+      <div class="section__header credenciales-header js-fade-in">
+        <span class="eyebrow">Resultados Chile</span>
+        <h2>Chile ya lo validó.</h2>
+        <span class="text-red">Los números no mienten.</span>
+        <div class="divider-gold"></div>
+      </div>
+
+      <div class="kpi-grid" style="margin-top: clamp(32px, 5vw, 56px);">
+
+        <!-- KPI 1 -->
+        <div class="kpi-card">
+          <div class="kpi-number">
+            <span data-counter="2" data-counter-prefix="Nº" data-counter-duration="1200">Nº2</span>
+          </div>
+          <div class="kpi-label">del mercado en Chile</div>
+          <p class="kpi-desc">30% de Market Share en volumen</p>
+        </div>
+
+        <!-- KPI 2 -->
+        <div class="kpi-card">
+          <div class="kpi-number">
+            <span data-counter="3.6" data-counter-decimals="1" data-counter-duration="1500">3.6</span>
+            <span class="kpi-unit">latas/seg</span>
+          </div>
+          <div class="kpi-label">Velocidad de venta</div>
+          <p class="kpi-desc">Cierre 2025</p>
+        </div>
+
+        <!-- KPI 3 -->
+        <div class="kpi-card">
+          <div class="kpi-number">
+            <span data-counter="1" data-counter-prefix="Nº" data-counter-duration="1000">Nº1</span>
+          </div>
+          <div class="kpi-label">Canal Tradicional</div>
+          <p class="kpi-desc">Dominio absoluto en almacenes y bodegas</p>
+        </div>
+
+        <!-- KPI 4 -->
+        <div class="kpi-card">
+          <div class="kpi-number">
+            <span data-counter="2.56" data-counter-decimals="2" data-counter-duration="1600">2.56</span>
+            <span class="kpi-unit">latas/seg</span>
+          </div>
+          <div class="kpi-label">Solo Score Gorilla</div>
+          <p class="kpi-desc">Guaraná: el sabor líder</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 4 — EL ADN: CALIDAD EUROPEA
+       ══════════════════════════════════════════════════════ -->
+  <section id="adn" class="section section--alt" aria-label="ADN europeo y calidad">
+    <div class="container">
+
+      <div class="section__header js-fade-in">
+        <span class="eyebrow">Origen &amp; Calidad</span>
+        <h2>No somos una más.</h2>
+        <h2 class="text-accent">Estándar europeo<br />a precio accesible.</h2>
+        <div class="divider-gold"></div>
+      </div>
+
+      <div class="adn-bloques">
+
+        <!-- Bloque 1: ORIGEN -->
+        <div class="adn-bloque js-fade-in">
+          <div class="adn-icon" aria-hidden="true">
+            <!-- Ícono: engranaje / precisión alemana -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </div>
+          <span class="adn-bloque__label">Origen</span>
+          <div class="adn-bloque__title">Ingeniería<br />Alemana</div>
+          <p class="adn-bloque__text">
+            Fórmula desarrollada en Alemania y Austria con los más
+            altos estándares tecnológicos de la industria.
+          </p>
+        </div>
+
+        <!-- Bloque 2: CALIDAD -->
+        <div class="adn-bloque js-fade-in">
+          <div class="adn-icon" aria-hidden="true">
+            <!-- Ícono: montaña / agua de los Alpes -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polygon points="3 20 9 4 15 13 18 9 21 20 3 20"/>
+              <path d="M3 20h18"/>
+            </svg>
+          </div>
+          <span class="adn-bloque__label">Calidad</span>
+          <div class="adn-bloque__title">Agua de<br />los Alpes</div>
+          <p class="adn-bloque__text">
+            Elaborada con agua de los Alpes austriacos y una selección
+            premium de ingredientes certificados en Europa.
+          </p>
+        </div>
+
+        <!-- Bloque 3: DIFERENCIADOR -->
+        <div class="adn-bloque js-fade-in">
+          <div class="adn-icon" aria-hidden="true">
+            <!-- Ícono: trofeo / estrella -->
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <span class="adn-bloque__label">Diferenciador</span>
+          <div class="adn-bloque__title">Premium<br />Accesible</div>
+          <p class="adn-bloque__text">
+            Ofrecemos al consumidor brasileño un estándar de calidad
+            que hoy solo encuentran en marcas de precio prohibitivo.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 5 — BRASIL: LA OPORTUNIDAD
+       ══════════════════════════════════════════════════════ -->
+  <section id="mercado" class="section" aria-label="Oportunidad de mercado Brasil">
+    <div class="container">
+
+      <div class="section__header js-fade-in">
+        <span class="eyebrow">Mercado Brasil</span>
+        <h2>Un mercado de</h2>
+        <h2 class="text-accent" style="font-size: clamp(3rem, 8vw, 7rem);">USD 3.300<br />Millones</h2>
+        <div class="divider-gold"></div>
+        <p>Con 300% de potencial sin explotar.</p>
+      </div>
+
+      <div class="mercado-bloques">
+
+        <!-- Bloque 1: Escala -->
+        <div class="mercado-bloque js-fade-in">
+          <span class="eyebrow" style="margin-bottom: 12px;">Escala de mercado</span>
+          <div class="mercado-bloque__num">USD 3.300M</div>
+          <p class="mercado-bloque__sub">Crecimiento anual del <strong style="color: var(--color-accent);">8.4%</strong></p>
+        </div>
+
+        <!-- Bloque 2: Comparativo per cápita -->
+        <div class="mercado-bloque js-fade-in">
+          <span class="eyebrow" style="margin-bottom: 12px;">Consumo per cápita</span>
+          <div class="consumo-comparativo">
+            <div class="consumo-row">
+              <span class="consumo-row__label">🇨🇱 Chile</span>
+              <div class="consumo-row__bar-wrap">
+                <div class="consumo-row__bar consumo-row__bar--chile"></div>
+              </div>
+              <span class="consumo-row__val">6L</span>
+            </div>
+            <div class="consumo-row">
+              <span class="consumo-row__label">🇧🇷 Brasil</span>
+              <div class="consumo-row__bar-wrap">
+                <div class="consumo-row__bar consumo-row__bar--brasil"></div>
+              </div>
+              <span class="consumo-row__val">~2L</span>
+            </div>
+          </div>
+          <p class="consumo-nota">
+            Brasil consume <strong style="color: var(--color-accent);">3× menos</strong> energéticas per cápita que Chile.
+            Ese es nuestro espacio de crecimiento.
+          </p>
+        </div>
+
+        <!-- Bloque 3: Target -->
+        <div class="mercado-bloque js-fade-in">
+          <span class="eyebrow" style="margin-bottom: 12px;">Target</span>
+          <div class="mercado-bloque__num" style="font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.2;">
+            Gen Z + Premium Accesible
+          </div>
+          <p class="mercado-bloque__sub" style="margin-top: 10px;">
+            El segmento de mayor crecimiento en Brasil 2024–2026.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 6 — PRODUCCIÓN LOCAL EN SÃO PAULO
+       ══════════════════════════════════════════════════════ -->
+  <section id="produccion" class="section section--alt" aria-label="Estrategia de producción local">
+    <div class="container">
+
+      <div class="section__header js-fade-in">
+        <span class="eyebrow">Estrategia de entrada</span>
+        <h2>No importamos.</h2>
+        <h2 class="text-accent">Producimos local.<br />Esa es nuestra ventaja.</h2>
+        <div class="divider-gold"></div>
+      </div>
+
+      <div class="produccion-layout">
+
+        <!-- Mapa SVG de Brasil con punto São Paulo -->
+        <div class="brasil-map-wrap js-fade-in" aria-label="Mapa de Brasil con foco en São Paulo">
+          <svg id="brasil-map" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brasil">
+            <!-- Silueta simplificada de Brasil -->
+            <path class="map-fill" d="
+              M200 30
+              L240 35 L270 50 L295 60 L315 80 L330 100 L340 125
+              L350 150 L355 175 L350 200 L345 220 L355 240
+              L365 255 L360 270 L350 280 L340 295 L335 315
+              L325 330 L310 340 L300 355 L290 370 L275 380
+              L260 390 L245 395 L230 400 L215 398 L200 390
+              L185 380 L170 365 L158 350 L150 335
+              L140 320 L130 305 L120 295 L110 285
+              L100 270 L95 255 L90 240 L88 225
+              L90 210 L95 195 L100 180 L105 165
+              L100 150 L95 135 L90 120 L85 105
+              L88 90 L95 75 L108 60 L125 48
+              L145 38 L165 32 L185 29 Z
+            " />
+
+            <!-- Líneas de estado (decorativas) -->
+            <line x1="200" y1="120" x2="280" y2="200" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
+            <line x1="140" y1="180" x2="220" y2="250" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
+            <line x1="160" y1="280" x2="280" y2="300" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
+
+            <!-- Punto São Paulo -->
+            <circle id="sp-dot-outer" cx="225" cy="355" r="14"/>
+            <circle id="sp-dot-inner" cx="225" cy="355" r="6"/>
+
+            <!-- Label São Paulo -->
+            <text id="sp-label" x="236" y="354" dominant-baseline="middle">SÃO PAULO</text>
+          </svg>
+        </div>
+
+        <!-- Pilares -->
+        <div class="pilares-grid js-stagger">
+
+          <div class="pilar-card">
+            <div class="pilar-card__title">⚡ Eficiencia Total</div>
+            <p class="pilar-card__text">
+              Producción directa en São Paulo. Sin costos de importación,
+              sin barreras arancelarias, con logística optimizada para Brasil.
+            </p>
+          </div>
+
+          <div class="pilar-card">
+            <div class="pilar-card__title">🚀 Agilidad</div>
+            <p class="pilar-card__text">
+              Replicamos el modelo de manufactura de Monster y Red Bull,
+              pero con la velocidad de decisión de una marca que ya domina
+              el canal mayorista latinoamericano.
+            </p>
+          </div>
+
+          <div class="pilar-card pilar-card--red">
+            <div class="pilar-card__title">🏪 Foco en el Atacarejo</div>
+            <p class="pilar-card__text">
+              <span class="pilar-card__red-tag">70% de nuestra venta exitosa es mayorista.</span>
+              El Atacarejo es el canal de mayor volumen en Brasil.
+              Lo conocemos. Lo dominamos.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 7 — EL PORTAFOLIO GANADOR
+       ══════════════════════════════════════════════════════ -->
+  <section id="portafolio" class="section" aria-label="Portafolio de productos">
+    <div class="container">
+
+      <div class="section__header js-fade-in">
+        <span class="eyebrow">Portafolio</span>
+        <h2>El portafolio correcto,</h2>
+        <h2 class="text-accent">para el mercado correcto.</h2>
+        <div class="divider-gold"></div>
+      </div>
+
+      <div class="portafolio-grid">
+
+        <!-- ── Score Gorilla ─────────────────────────── -->
+        <article class="producto-card producto-card--gorilla">
+          <div class="lata-mockup lata-mockup--gorilla" aria-hidden="true">
+            <div class="lata-mockup__can">
+              <span class="lata-mockup__name">SCORE<br />GORILLA</span>
+            </div>
+          </div>
+          <div class="producto-card__body">
+            <div class="producto-card__sub">Guaraná</div>
+            <h3 class="producto-card__name">Score Gorilla</h3>
+            <p class="producto-card__desc">
+              El rey del Guaraná. El sabor preferido en Brasil.
+              Nuestra variante más vendida: 2.56 latas por segundo.
+            </p>
+            <div class="producto-card__footer">
+              <span class="badge">SABOR #1 EN CHILE</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Línea Zero ─────────────────────────────── -->
+        <article class="producto-card producto-card--zero">
+          <div class="lata-mockup lata-mockup--zero" aria-hidden="true">
+            <div class="lata-mockup__can">
+              <span class="lata-mockup__name" style="color: rgba(0,20,50,0.95);">SCORE<br />ZERO</span>
+            </div>
+          </div>
+          <div class="producto-card__body">
+            <div class="producto-card__sub">Sin Azúcar</div>
+            <h3 class="producto-card__name">Línea Zero</h3>
+            <p class="producto-card__desc">
+              40% de los consumidores jóvenes en Brasil
+              ya exigen opciones sin azúcar. Llegamos listos.
+            </p>
+            <div class="producto-card__footer">
+              <span class="badge" style="background: var(--azul-zero); color: #fff;">TENDENCIA CRECIENTE</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ── Innovación ──────────────────────────────── -->
+        <article class="producto-card producto-card--innov">
+          <div class="lata-mockup lata-mockup--innov" aria-hidden="true">
+            <div class="lata-mockup__can">
+              <span class="lata-mockup__name">MANGO &amp;<br />BUBBLE GUM</span>
+            </div>
+          </div>
+          <div class="producto-card__body">
+            <div class="producto-card__sub">Mango &amp; Bubble Gum</div>
+            <h3 class="producto-card__name">Innovación</h3>
+            <p class="producto-card__desc">
+              Sabores disruptivos para capturar al público
+              Generación Z. Lo que la competencia aún no ofrece.
+            </p>
+            <div class="producto-card__footer">
+              <span class="badge" style="background: var(--naranja-innov);">GEN Z TARGET</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 8 — CIERRE (PINNEADA)
+       ══════════════════════════════════════════════════════ -->
+  <section id="cierre" class="section" aria-label="Cierre y contacto">
+    <div class="cierre__content">
+
+      <!-- Frase 1 -->
+      <div class="cierre__frase cierre__frase--blanco" aria-label="En Chile vendemos 3.6 latas por segundo">
+        EN CHILE VENDEMOS<br />
+        3.6 LATAS POR SEGUNDO.
+      </div>
+
+      <!-- Frase 2 -->
+      <div class="cierre__frase cierre__frase--accent">
+        EN BRASIL, ESTAMOS LISTOS<br />
+        PARA SUPERAR LOS<br />RÉCORDS REGIONALES.
+      </div>
+
+      <!-- CTA -->
+      <p class="cierre__cta">
+        Únete a la expansión de la marca más dinámica<br />de Latinoamérica.
+      </p>
+
+      <!-- Divisor -->
+      <div class="cierre__divider" aria-hidden="true"></div>
+
+      <!-- Datos de contacto — reemplazar placeholders -->
+      <address class="cierre__contacto" style="font-style: normal;">
+        <span>[NOMBRE Y APELLIDO]</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>[CARGO]</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>[EMAIL]</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span>[TELÉFONO]</span>
+      </address>
+
+      <!-- Footer -->
+      <p class="cierre__footer">
+        © 2026 Score Energy Drink ·
+        <a href="https://scoreenergydrink.com" style="color: var(--color-accent);">scoreenergydrink.com</a>
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCRIPTS (CDN primero, luego código propio)
+       ══════════════════════════════════════════════════════ -->
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+          integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+          integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"
+          integrity="sha512-6GVrp5V3p7MbMnBQPAASqYs2bsMthziof9MiyM8iEEMuGfCFTbDCwoMgKVzCMlGLSW0DhLRvfSL/3JhYMO6Yw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Core compartido -->
+  <script src="/shared/js/core.js"></script>
+
+  <!-- Lógica específica Score Brasil -->
+  <script src="/brands/score-brasil/js/main.js"></script>
+
+</body>
+</html>

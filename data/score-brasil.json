@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "marca":       "Score Energy Drink",
+    "mercado":     "Brasil",
+    "año":         2026,
+    "version":     "1.0.0",
+    "actualizado": "2026-03-10"
+  },
+
+  "grafico_crecimiento": {
+    "labels": ["2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2025","2026"],
+    "data":   [1,     1.5,   2,     2,     5,     8,     12,    17,    40,    100,   114,   130],
+    "notas": {
+      "2020": "Explosión de mercado",
+      "2021": "100M en 12 meses",
+      "2025": "Récord histórico",
+      "2026": "Proyección objetivo"
+    }
+  },
+
+  "kpis": [
+    {
+      "id":        "market-position",
+      "valor":     2,
+      "prefijo":   "Nº",
+      "decimales": 0,
+      "label":     "del mercado en Chile",
+      "desc":      "30% de Market Share en volumen"
+    },
+    {
+      "id":        "latas-seg-total",
+      "valor":     3.6,
+      "prefijo":   "",
+      "decimales": 1,
+      "unidad":    "latas/seg",
+      "label":     "Velocidad de venta",
+      "desc":      "Cierre 2025"
+    },
+    {
+      "id":        "canal-tradicional",
+      "valor":     1,
+      "prefijo":   "Nº",
+      "decimales": 0,
+      "label":     "Canal Tradicional",
+      "desc":      "Dominio absoluto en almacenes y bodegas"
+    },
+    {
+      "id":        "latas-seg-gorilla",
+      "valor":     2.56,
+      "prefijo":   "",
+      "decimales": 2,
+      "unidad":    "latas/seg",
+      "label":     "Solo Score Gorilla",
+      "desc":      "Guaraná: el sabor líder"
+    }
+  ],
+
+  "hitos": [
+    {
+      "label": "2020–2021",
+      "titulo": "De 40M a 100M en 12 meses",
+      "descripcion": "El mayor salto en la historia de la marca."
+    },
+    {
+      "label": "2025",
+      "titulo": "Récord histórico — 114M latas",
+      "descripcion": "El año más exitoso desde la fundación."
+    },
+    {
+      "label": "2026",
+      "titulo": "Objetivo — 130M unidades",
+      "descripcion": "Meta con expansión regional a Brasil."
+    }
+  ],
+
+  "mercado_brasil": {
+    "tamaño_usd":      3300000000,
+    "crecimiento_anual": 8.4,
+    "consumo_chile_litros":  6,
+    "consumo_brasil_litros": 2,
+    "target":          "Generación Z + Consumidores Premium Accesible"
+  },
+
+  "portfolio": [
+    {
+      "id":          "gorilla",
+      "nombre":      "Score Gorilla",
+      "subtitulo":   "Guaraná",
+      "acento":      "#2D5A27",
+      "gradiente":   "linear-gradient(135deg, #2D5A27 0%, #0A0A0A 100%)",
+      "descripcion": "El rey del Guaraná. El sabor preferido en Brasil. Nuestra variante más vendida: 2.56 latas por segundo.",
+      "badge":       "SABOR #1 EN CHILE"
+    },
+    {
+      "id":          "zero",
+      "nombre":      "Línea Zero",
+      "subtitulo":   "Sin Azúcar",
+      "acento":      "#1A3A5C",
+      "gradiente":   "linear-gradient(135deg, #e8f4f8 0%, #1A3A5C 100%)",
+      "descripcion": "40% de los consumidores jóvenes en Brasil ya exigen opciones sin azúcar. Llegamos listos.",
+      "badge":       "TENDENCIA CRECIENTE"
+    },
+    {
+      "id":          "innovacion",
+      "nombre":      "Innovación",
+      "subtitulo":   "Mango & Bubble Gum",
+      "acento":      "#FF6B00",
+      "gradiente":   "linear-gradient(135deg, #FF6B00 0%, #d63384 100%)",
+      "descripcion": "Sabores disruptivos para capturar al público Generación Z. Lo que la competencia aún no ofrece.",
+      "badge":       "GEN Z TARGET"
+    }
+  ],
+
+  "contacto": {
+    "nombre":   "[NOMBRE Y APELLIDO]",
+    "cargo":    "[CARGO]",
+    "email":    "[EMAIL]",
+    "telefono": "[TELÉFONO]"
+  }
+}
