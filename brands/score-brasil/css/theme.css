@@ -416,54 +416,107 @@
   margin-top: clamp(40px, 6vw, 64px);
 }
 
-/* Mapa SVG de Brasil */
-.brasil-map-wrap {
+/* ── São Paulo Production Hub ─────────────────────────────── */
+.sp-hub-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#brasil-map {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
-  opacity: 0.85;
+.sp-hub {
+  position: relative;
+  width: clamp(260px, 36vw, 380px);
+  height: clamp(260px, 36vw, 380px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#brasil-map .map-fill {
-  fill: #1a1a1a;
-  stroke: var(--color-accent);
-  stroke-width: 1.2;
+/* Centro del hub */
+.sp-hub__center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
 }
 
-#sp-dot-outer {
-  fill: rgba(255, 215, 0, 0.25);
-  animation: sp-pulse 2.2s ease-in-out infinite;
+.sp-hub__badge {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  color: var(--color-accent);
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
 }
 
-#sp-dot-inner {
-  fill: var(--color-accent);
-  filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.9));
-  animation: sp-pulse-inner 2.2s ease-in-out infinite;
-}
-
-#sp-label {
-  fill: var(--color-accent);
+.sp-hub__city {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.sp-hub__sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Anillo SVG giratorio */
+.sp-hub__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Nodos periféricos */
+.sp-hub__nodes {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sp-hub__node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-50%, -50%);
+}
+
+.sp-hub__node--top    { top: 6%;  left: 50%; }
+.sp-hub__node--right  { top: 50%; left: 92%; }
+.sp-hub__node--bottom { top: 94%; left: 50%; }
+.sp-hub__node--left   { top: 50%; left: 8%;  }
+
+.sp-hub__node-icon {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+}
+
+.sp-hub__node-label {
+  font-family: var(--font-body);
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
   font-weight: 600;
+  color: var(--color-text-muted);
+  text-align: center;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
-@keyframes sp-pulse {
-  0%, 100% { r: 14; opacity: 0.6; }
-  50%       { r: 22; opacity: 0.2; }
-}
-
-@keyframes sp-pulse-inner {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.7; }
-}
+/* Animaciones reducidas */
 
 /* Pilares de producción */
 .pilares-grid {
@@ -773,9 +826,13 @@
     grid-template-columns: 1fr;
   }
 
-  .brasil-map-wrap {
-    max-width: 260px;
-    margin: 0 auto;
+  .sp-hub-wrap {
+    margin: 0 auto 16px;
+  }
+
+  .sp-hub {
+    width: clamp(220px, 60vw, 300px);
+    height: clamp(220px, 60vw, 300px);
   }
 }
 

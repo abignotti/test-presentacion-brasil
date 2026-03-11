@@ -64,7 +64,7 @@
         <span class="eyebrow">La trayectoria que habla por sí sola</span>
         <h2>La "Curva de<br /><span class="text-accent">la Victoria"</span></h2>
         <div class="divider-gold"></div>
-        <p>De 1 millón a 130 millones: 14 años de crecimiento sostenido</p>
+        <p>De 1 millón a 113.8 millones: 14 años de crecimiento sostenido — objetivo 2026: 120M</p>
       </div>
 
       <!-- Gráfico Chart.js -->
@@ -88,7 +88,7 @@
         </div>
         <div class="hito-card">
           <span class="hito-card__year">2026</span>
-          <div class="hito-card__title">Objetivo —<br />130M unidades</div>
+          <div class="hito-card__title">Objetivo —<br />120M unidades</div>
           <p class="hito-card__desc">Meta con expansión regional a Brasil.</p>
         </div>
       </div>
@@ -304,38 +304,53 @@
 
       <div class="produccion-layout">
 
-        <!-- Mapa SVG de Brasil con punto São Paulo -->
-        <div class="brasil-map-wrap js-fade-in" aria-label="Mapa de Brasil con foco en São Paulo">
-          <svg id="brasil-map" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brasil">
-            <!-- Silueta simplificada de Brasil -->
-            <path class="map-fill" d="
-              M200 30
-              L240 35 L270 50 L295 60 L315 80 L330 100 L340 125
-              L350 150 L355 175 L350 200 L345 220 L355 240
-              L365 255 L360 270 L350 280 L340 295 L335 315
-              L325 330 L310 340 L300 355 L290 370 L275 380
-              L260 390 L245 395 L230 400 L215 398 L200 390
-              L185 380 L170 365 L158 350 L150 335
-              L140 320 L130 305 L120 295 L110 285
-              L100 270 L95 255 L90 240 L88 225
-              L90 210 L95 195 L100 180 L105 165
-              L100 150 L95 135 L90 120 L85 105
-              L88 90 L95 75 L108 60 L125 48
-              L145 38 L165 32 L185 29 Z
-            " />
+        <!-- São Paulo Production Hub — infográfico -->
+        <div class="sp-hub-wrap js-fade-in" aria-label="Hub de producción São Paulo">
+          <div class="sp-hub">
 
-            <!-- Líneas de estado (decorativas) -->
-            <line x1="200" y1="120" x2="280" y2="200" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
-            <line x1="140" y1="180" x2="220" y2="250" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
-            <line x1="160" y1="280" x2="280" y2="300" stroke="rgba(255,215,0,0.12)" stroke-width="0.8"/>
+            <!-- Centro -->
+            <div class="sp-hub__center">
+              <div class="sp-hub__badge">SP</div>
+              <div class="sp-hub__city">SÃO PAULO</div>
+              <div class="sp-hub__sub">Hub de Producción</div>
+            </div>
 
-            <!-- Punto São Paulo -->
-            <circle id="sp-dot-outer" cx="225" cy="355" r="14"/>
-            <circle id="sp-dot-inner" cx="225" cy="355" r="6"/>
+            <!-- Anillo animado -->
+            <svg class="sp-hub__ring" viewBox="0 0 300 300" aria-hidden="true">
+              <circle cx="150" cy="150" r="120" fill="none"
+                stroke="rgba(255,215,0,0.12)" stroke-width="1"/>
+              <circle cx="150" cy="150" r="120" fill="none"
+                stroke="rgba(255,215,0,0.5)" stroke-width="1"
+                stroke-dasharray="50 700"
+                stroke-linecap="round">
+                <animateTransform attributeName="transform" type="rotate"
+                  from="0 150 150" to="360 150 150" dur="8s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="150" cy="150" r="80" fill="none"
+                stroke="rgba(255,215,0,0.07)" stroke-width="1"/>
+            </svg>
 
-            <!-- Label São Paulo -->
-            <text id="sp-label" x="236" y="354" dominant-baseline="middle">SÃO PAULO</text>
-          </svg>
+            <!-- 4 ventajas alrededor del hub -->
+            <div class="sp-hub__nodes">
+              <div class="sp-hub__node sp-hub__node--top">
+                <div class="sp-hub__node-icon">🏭</div>
+                <div class="sp-hub__node-label">Producción<br />Local</div>
+              </div>
+              <div class="sp-hub__node sp-hub__node--right">
+                <div class="sp-hub__node-icon">🚚</div>
+                <div class="sp-hub__node-label">Logística<br />Directa</div>
+              </div>
+              <div class="sp-hub__node sp-hub__node--bottom">
+                <div class="sp-hub__node-icon">💰</div>
+                <div class="sp-hub__node-label">0%<br />Aranceles</div>
+              </div>
+              <div class="sp-hub__node sp-hub__node--left">
+                <div class="sp-hub__node-icon">⚡</div>
+                <div class="sp-hub__node-label">Precio<br />Competitivo</div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
         <!-- Pilares -->

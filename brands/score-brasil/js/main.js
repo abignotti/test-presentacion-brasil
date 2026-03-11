@@ -248,17 +248,24 @@ function buildChart(canvas) {
   gradient.addColorStop(0.6, 'rgba(255, 215, 0, 0.08)');
   gradient.addColorStop(1,   'rgba(255, 215, 0, 0)');
 
-  const labels = ['2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2025','2026'];
-  const data   = [1, 1.5, 2, 2, 5, 8, 12, 17, 40, 100, 114, 130];
+  /* ── Datos reales extraídos del Excel de ventas históricas ── */
+  const labels = ['2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+  const data   = [1.07,  1.74,  1.69,  2.15,  5.36,  9.20,  11.65, 17.14, 39.85, 100.22, 99.46, 88.72, 99.04, 113.81, 120];
 
-  /* Colores puntuales: 2025 amarillo brillante, 2026 con borde */
-  const pointBg    = labels.map((l) => l === '2025' || l === '2026' ? '#FFD700' : 'rgba(255,215,0,0.6)');
-  const pointRadii = labels.map((l) => l === '2025' || l === '2026' ? 7 : 4);
-  const pointBorder= labels.map((l) => l === '2026' ? '#FFFFFF' : '#FFD700');
+  /* Puntos especiales: 2021, 2025 y 2026 destacados */
+  const pointBg = labels.map((l) => {
+    if (l === '2021' || l === '2025') return '#FFD700';
+    if (l === '2026') return 'rgba(255,215,0,0.4)';
+    return 'rgba(255,215,0,0.55)';
+  });
+  const pointRadii = labels.map((l) =>
+    l === '2021' || l === '2025' ? 7 : l === '2026' ? 7 : 4
+  );
+  const pointBorder = labels.map((l) => l === '2026' ? '#FFFFFF' : '#FFD700');
 
   /* Dataset sólido (hasta 2025) */
   const dataSolid  = data.map((v, i) => i < labels.indexOf('2026') ? v : null);
-  /* Dataset punteado (2025 → 2026) */
+  /* Dataset punteado (2025 → 2026 proyección) */
   const dataDashed = data.map((v, i) => {
     if (i === labels.indexOf('2025') || i === labels.indexOf('2026')) return v;
     return null;
@@ -270,7 +277,7 @@ function buildChart(canvas) {
       labels,
       datasets: [
         {
-          label:               'Latas vendidas (millones)',
+          label:               'Ventas reales (millones de unidades)',
           data:                dataSolid,
           fill:                true,
           backgroundColor:     gradient,
@@ -285,17 +292,17 @@ function buildChart(canvas) {
           spanGaps:            false,
         },
         {
-          label:               'Proyección 2026',
+          label:               'Objetivo 2026: 120M',
           data:                dataDashed,
           fill:                false,
           borderColor:         'rgba(255,215,0,0.55)',
           borderWidth:         2,
           borderDash:          [6, 4],
-          pointBackgroundColor: ['transparent', '#FFD700'],
-          pointBorderColor:    ['transparent', '#FFFFFF'],
+          pointBackgroundColor: labels.map((l) => l === '2025' ? 'transparent' : '#FFD700'),
+          pointBorderColor:    labels.map((l) => l === '2026' ? '#FFFFFF' : 'transparent'),
           pointBorderWidth:    2,
-          pointRadius:         [0, 7],
-          pointHoverRadius:    [0, 9],
+          pointRadius:         labels.map((l) => l === '2026' ? 7 : 0),
+          pointHoverRadius:    labels.map((l) => l === '2026' ? 9 : 0),
           tension:             0.4,
           spanGaps:            true,
         },
@@ -337,10 +344,13 @@ function buildChart(canvas) {
             label: (item) => {
               if (item.datasetIndex === 1 && item.raw === null) return null;
               const notas = {
-                '2020': 'Explosión de mercado',
-                '2021': '100M en 12 meses',
+                '2020': '🚀 Explosión de mercado',
+                '2021': '⚡ +151%: de 40M a 100M',
+                '2022': 'Ajuste post-pandemia',
+                '2023': 'Ajuste de mercado',
+                '2024': 'Recuperación',
                 '2025': '★ Récord histórico',
-                '2026': '⟶ Proyección objetivo',
+                '2026': '⟶ Objetivo: 120M unidades',
               };
               const nota = notas[item.label] ? `  ${notas[item.label]}` : '';
               return ` ${item.raw}M latas${nota}`;

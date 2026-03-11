@@ -8,13 +8,14 @@
   },
 
   "grafico_crecimiento": {
-    "labels": ["2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2025","2026"],
-    "data":   [1,     1.5,   2,     2,     5,     8,     12,    17,    40,    100,   114,   130],
+    "labels": ["2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"],
+    "data":   [1.07,  1.74,  1.69,  2.15,  5.36,  9.20,  11.65, 17.14, 39.85, 100.22, 99.46, 88.72, 99.04, 113.81, 120],
     "notas": {
       "2020": "Explosión de mercado",
-      "2021": "100M en 12 meses",
-      "2025": "Récord histórico",
-      "2026": "Proyección objetivo"
+      "2021": "+151%: de 40M a 100M",
+      "2022": "Ajuste post-pandemia",
+      "2025": "Récord histórico: 113.8M",
+      "2026": "Objetivo: 120M unidades"
     }
   },
 
@@ -63,12 +64,12 @@
     },
     {
       "label": "2025",
-      "titulo": "Récord histórico — 114M latas",
+      "titulo": "Récord histórico — 113.8M latas",
       "descripcion": "El año más exitoso desde la fundación."
     },
     {
       "label": "2026",
-      "titulo": "Objetivo — 130M unidades",
+      "titulo": "Objetivo — 120M unidades",
       "descripcion": "Meta con expansión regional a Brasil."
     }
   ],
