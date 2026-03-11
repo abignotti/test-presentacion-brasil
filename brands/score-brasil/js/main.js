@@ -229,7 +229,7 @@ function animarBarrasConsumo() {
         buildBarChart(container);
       }
     },
-    { threshold: 0.25 }
+    { threshold: 0 }
   );
 
   observer.observe(container);
