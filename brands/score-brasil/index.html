@@ -64,14 +64,12 @@
         <span class="eyebrow">La trayectoria que habla por sí sola</span>
         <h2>La "Curva de<br /><span class="text-accent">la Victoria"</span></h2>
         <div class="divider-gold"></div>
-        <p>De 1 millón a 113.8 millones: 14 años de crecimiento sostenido — objetivo 2026: 120M</p>
+        <p>De 1 millón a 114 millones: 14 años de crecimiento sostenido — objetivo 2026: 120M</p>
       </div>
 
-      <!-- Gráfico Chart.js -->
+      <!-- Gráfico SVG puro — sin dependencias externas -->
       <div class="chart-wrapper js-fade-in">
-        <div class="chart-canvas-container">
-          <canvas id="growth-chart" aria-label="Gráfico de crecimiento de ventas Score Energy 2012–2026"></canvas>
-        </div>
+        <div id="growth-chart-container" class="chart-svg-wrap"></div>
       </div>
 
       <!-- Hitos debajo del gráfico -->
@@ -526,10 +524,6 @@
           integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- Chart.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"
-          integrity="sha512-6GVrp5V3p7MbMnBQPAASqYs2bsMthziof9MiyM8iEEMuGfCFTbDCwoMgKVzCMlGLSW0DhLRvfSL/3JhYMO6Yw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Core compartido -->
   <script src="/shared/js/core.js"></script>

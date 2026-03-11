@@ -1,7 +1,8 @@
 /* ============================================================
    BRANDS/SCORE-BRASIL/JS/MAIN.JS
    Lógica y animaciones de la presentación Score Brasil 2026.
-   Usa GSAP + ScrollTrigger y Chart.js (cargados vía CDN).
+   Usa GSAP + ScrollTrigger (cargados vía CDN).
+   Gráfico de crecimiento: SVG puro, sin dependencias externas.
    ============================================================ */
 
 'use strict';
@@ -210,200 +211,292 @@ function animarBarrasConsumo() {
 
 
 /* ────────────────────────────────────────────────────────────
-   4. CHART.JS — CURVA DE CRECIMIENTO
+   4. GRÁFICO DE CRECIMIENTO — SVG PURO (sin Chart.js)
+   6 hitos clave animados con stagger al entrar en pantalla.
+   Tooltip interactivo al hacer hover.
    ──────────────────────────────────────────────────────────── */
-(function initChart() {
-  const canvas = document.getElementById('growth-chart');
-  if (!canvas) return;
-  if (typeof Chart === 'undefined') {
-    console.warn('Chart.js no disponible.');
-    return;
-  }
+(function initBarChart() {
+  const container = document.getElementById('growth-chart-container');
+  if (!container) return;
 
-  let chartInitialized = false;
+  let animated = false;
 
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !chartInitialized) {
-          chartInitialized = true;
-          observer.disconnect();
-          buildChart(canvas);
-        }
-      });
+      if (entries[0].isIntersecting && !animated) {
+        animated = true;
+        observer.disconnect();
+        buildBarChart(container);
+      }
     },
-    { threshold: 0.3 }
+    { threshold: 0.25 }
   );
 
-  observer.observe(canvas);
+  observer.observe(container);
 })();
 
-function buildChart(canvas) {
-  const isMobile = window.innerWidth <= 768;
-  const ctx      = canvas.getContext('2d');
+function buildBarChart(container) {
+  const milestones = [
+    { year: '2012', value: 1.07,   label: '1M',      note: 'Inicio en Chile',       accent: false, proj: false },
+    { year: '2016', value: 5.36,   label: '5.4M',    note: 'Expansión nacional',    accent: false, proj: false },
+    { year: '2020', value: 39.85,  label: '39.9M',   note: '🚀 Explosión mercado',  accent: false, proj: false },
+    { year: '2021', value: 100.22, label: '100M',    note: '⚡ +151% en 12 meses',  accent: true,  proj: false },
+    { year: '2025', value: 113.81, label: '113.8M',  note: '★ Récord histórico',    accent: true,  proj: false },
+    { year: '2026', value: 120,    label: '120M',    note: '⟶ Objetivo Brasil',     accent: false, proj: true  },
+  ];
 
-  /* Gradiente de relleno */
-  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.offsetHeight || 300);
-  gradient.addColorStop(0,   'rgba(255, 215, 0, 0.35)');
-  gradient.addColorStop(0.6, 'rgba(255, 215, 0, 0.08)');
-  gradient.addColorStop(1,   'rgba(255, 215, 0, 0)');
+  /* ── Dimensiones ─── */
+  const W        = 660;
+  const H        = 320;
+  const TOP      = 24;
+  const BOTTOM   = 248;
+  const CHART_H  = BOTTOM - TOP;   // 224px de altura útil
+  const MAX_VAL  = 130;
+  const SCALE    = (CHART_H * 0.92) / MAX_VAL;
+  const BAR_W    = 62;
+  const GAP      = 28;
+  const LEFT_PAD = 68;
 
-  /* ── Datos reales extraídos del Excel de ventas históricas ── */
-  const labels = ['2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
-  const data   = [1.07,  1.74,  1.69,  2.15,  5.36,  9.20,  11.65, 17.14, 39.85, 100.22, 99.46, 88.72, 99.04, 113.81, 120];
+  const ns = 'http://www.w3.org/2000/svg';
 
-  /* Puntos especiales: 2021, 2025 y 2026 destacados */
-  const pointBg = labels.map((l) => {
-    if (l === '2021' || l === '2025') return '#FFD700';
-    if (l === '2026') return 'rgba(255,215,0,0.4)';
-    return 'rgba(255,215,0,0.55)';
+  /* ── SVG ─── */
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('xmlns', ns);
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', 'Gráfico de crecimiento Score Energy 2012-2026');
+  svg.style.cssText = 'width:100%;height:auto;display:block;overflow:visible';
+
+  /* ── Tooltip div ─── */
+  const tooltip = document.createElement('div');
+  tooltip.setAttribute('role', 'tooltip');
+  tooltip.style.cssText = [
+    'position:absolute',
+    'display:none',
+    'pointer-events:none',
+    'background:rgba(12,12,12,0.96)',
+    'border:1px solid rgba(255,215,0,0.45)',
+    'color:#fff',
+    'padding:10px 16px',
+    'border-radius:8px',
+    'font-family:Inter,sans-serif',
+    'font-size:13px',
+    'line-height:1.6',
+    'z-index:200',
+    'white-space:nowrap',
+    'box-shadow:0 4px 24px rgba(0,0,0,0.6)',
+    'transform:translateX(-50%)',
+  ].join(';');
+  container.style.position = 'relative';
+  container.appendChild(tooltip);
+
+  /* ── Defs: filtro glow ─── */
+  const defs = document.createElementNS(ns, 'defs');
+  defs.innerHTML =
+    '<filter id="scoreGlow" x="-30%" y="-30%" width="160%" height="160%">' +
+      '<feGaussianBlur stdDeviation="4" result="blur"/>' +
+      '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>' +
+    '</filter>';
+  svg.appendChild(defs);
+
+  /* ── Líneas de referencia Y ─── */
+  [25, 50, 75, 100].forEach((tick) => {
+    const y = BOTTOM - tick * SCALE;
+
+    const line = document.createElementNS(ns, 'line');
+    line.setAttribute('x1', LEFT_PAD);
+    line.setAttribute('y1', y);
+    line.setAttribute('x2', W - 16);
+    line.setAttribute('y2', y);
+    line.setAttribute('stroke', 'rgba(255,255,255,0.055)');
+    line.setAttribute('stroke-width', '1');
+    svg.appendChild(line);
+
+    const label = document.createElementNS(ns, 'text');
+    label.setAttribute('x', LEFT_PAD - 8);
+    label.setAttribute('y', y + 4);
+    label.setAttribute('text-anchor', 'end');
+    label.setAttribute('fill', '#555');
+    label.setAttribute('font-family', 'Inter,sans-serif');
+    label.setAttribute('font-size', '11');
+    label.textContent = tick + 'M';
+    svg.appendChild(label);
   });
-  const pointRadii = labels.map((l) =>
-    l === '2021' || l === '2025' ? 7 : l === '2026' ? 7 : 4
-  );
-  const pointBorder = labels.map((l) => l === '2026' ? '#FFFFFF' : '#FFD700');
 
-  /* Dataset sólido (hasta 2025) */
-  const dataSolid  = data.map((v, i) => i < labels.indexOf('2026') ? v : null);
-  /* Dataset punteado (2025 → 2026 proyección) */
-  const dataDashed = data.map((v, i) => {
-    if (i === labels.indexOf('2025') || i === labels.indexOf('2026')) return v;
-    return null;
+  /* ── Línea base ─── */
+  const baseline = document.createElementNS(ns, 'line');
+  baseline.setAttribute('x1', LEFT_PAD);
+  baseline.setAttribute('y1', BOTTOM);
+  baseline.setAttribute('x2', W - 16);
+  baseline.setAttribute('y2', BOTTOM);
+  baseline.setAttribute('stroke', 'rgba(255,255,255,0.18)');
+  baseline.setAttribute('stroke-width', '1');
+  svg.appendChild(baseline);
+
+  /* ── Barras ─── */
+  const barItems = [];
+
+  milestones.forEach((m, i) => {
+    const x      = LEFT_PAD + i * (BAR_W + GAP);
+    const cx     = x + BAR_W / 2;
+    const finalH = Math.max(5, m.value * SCALE);
+
+    /* Color de la barra */
+    const fillColor = m.accent
+      ? '#FFD700'
+      : m.proj
+        ? 'rgba(255,215,0,0.28)'
+        : 'rgba(255,215,0,0.60)';
+
+    /* Rect de la barra (altura 0 al inicio para la animación) */
+    const rect = document.createElementNS(ns, 'rect');
+    rect.setAttribute('x', x);
+    rect.setAttribute('y', BOTTOM);
+    rect.setAttribute('width', BAR_W);
+    rect.setAttribute('height', 0);
+    rect.setAttribute('rx', '5');
+    rect.setAttribute('fill', fillColor);
+    if (m.proj) {
+      rect.setAttribute('stroke', 'rgba(255,215,0,0.7)');
+      rect.setAttribute('stroke-width', '1.5');
+      rect.setAttribute('stroke-dasharray', '5 3');
+    }
+    if (m.accent) {
+      rect.setAttribute('filter', 'url(#scoreGlow)');
+    }
+    svg.appendChild(rect);
+
+    /* Etiqueta de valor (encima de la barra, invisible hasta que termine la animación) */
+    const valText = document.createElementNS(ns, 'text');
+    valText.setAttribute('x', cx);
+    valText.setAttribute('y', BOTTOM - finalH - 9);
+    valText.setAttribute('text-anchor', 'middle');
+    valText.setAttribute('fill', m.accent ? '#FFD700' : m.proj ? 'rgba(255,215,0,0.7)' : '#999');
+    valText.setAttribute('font-family', 'Inter,sans-serif');
+    valText.setAttribute('font-size', m.accent ? '13' : '11');
+    valText.setAttribute('font-weight', m.accent ? '700' : '400');
+    valText.setAttribute('opacity', '0');
+    valText.textContent = m.label;
+    svg.appendChild(valText);
+
+    /* Etiqueta año (debajo de la línea base) */
+    const yearText = document.createElementNS(ns, 'text');
+    yearText.setAttribute('x', cx);
+    yearText.setAttribute('y', BOTTOM + 22);
+    yearText.setAttribute('text-anchor', 'middle');
+    yearText.setAttribute('fill', m.accent ? '#FFD700' : m.proj ? 'rgba(255,215,0,0.65)' : '#666');
+    yearText.setAttribute('font-family', 'Inter,sans-serif');
+    yearText.setAttribute('font-size', '12');
+    yearText.setAttribute('font-weight', m.accent ? '600' : '400');
+    yearText.textContent = m.year;
+    svg.appendChild(yearText);
+
+    /* Badge especial para barras accent */
+    if (m.accent) {
+      const badge = document.createElementNS(ns, 'text');
+      badge.setAttribute('x', cx);
+      badge.setAttribute('y', BOTTOM - finalH - 26);
+      badge.setAttribute('text-anchor', 'middle');
+      badge.setAttribute('fill', '#FFD700');
+      badge.setAttribute('font-size', '14');
+      badge.setAttribute('opacity', '0');
+      badge.textContent = m.year === '2021' ? '⚡' : '★';
+      svg.appendChild(badge);
+      barItems.push({ rect, valText, badge, finalH, delay: i * 100 });
+    } else {
+      barItems.push({ rect, valText, badge: null, finalH, delay: i * 100 });
+    }
+
+    /* Rect invisible para eventos hover (cubre toda la columna) */
+    const hitRect = document.createElementNS(ns, 'rect');
+    hitRect.setAttribute('x', x - GAP / 2);
+    hitRect.setAttribute('y', TOP);
+    hitRect.setAttribute('width', BAR_W + GAP);
+    hitRect.setAttribute('height', BOTTOM - TOP + 36);
+    hitRect.setAttribute('fill', 'transparent');
+    hitRect.style.cursor = 'pointer';
+
+    hitRect.addEventListener('mouseenter', () => {
+      tooltip.innerHTML =
+        '<strong style="color:#FFD700;font-size:15px">' + m.year + '</strong><br/>' +
+        '<span style="color:#aaa;font-size:12px">' + m.note + '</span><br/>' +
+        '<span style="font-size:20px;font-weight:700;color:#fff">' + m.label + '</span>' +
+        '<span style="color:#888;font-size:12px"> latas</span>';
+      tooltip.style.display = 'block';
+    });
+
+    hitRect.addEventListener('mousemove', (e) => {
+      const bounds = container.getBoundingClientRect();
+      const relX   = e.clientX - bounds.left;
+      const relY   = e.clientY - bounds.top;
+      /* Evitar que el tooltip se salga por la derecha */
+      const maxLeft = bounds.width - 10;
+      tooltip.style.left = Math.min(relX, maxLeft) + 'px';
+      tooltip.style.top  = (relY - 72) + 'px';
+    });
+
+    hitRect.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+    });
+
+    svg.appendChild(hitRect);
   });
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label:               'Ventas reales (millones de unidades)',
-          data:                dataSolid,
-          fill:                true,
-          backgroundColor:     gradient,
-          borderColor:         '#FFD700',
-          borderWidth:         2.5,
-          pointBackgroundColor: pointBg,
-          pointBorderColor:    pointBorder,
-          pointBorderWidth:    2,
-          pointRadius:         pointRadii,
-          pointHoverRadius:    8,
-          tension:             0.45,
-          spanGaps:            false,
-        },
-        {
-          label:               'Objetivo 2026: 120M',
-          data:                dataDashed,
-          fill:                false,
-          borderColor:         'rgba(255,215,0,0.55)',
-          borderWidth:         2,
-          borderDash:          [6, 4],
-          pointBackgroundColor: labels.map((l) => l === '2025' ? 'transparent' : '#FFD700'),
-          pointBorderColor:    labels.map((l) => l === '2026' ? '#FFFFFF' : 'transparent'),
-          pointBorderWidth:    2,
-          pointRadius:         labels.map((l) => l === '2026' ? 7 : 0),
-          pointHoverRadius:    labels.map((l) => l === '2026' ? 9 : 0),
-          tension:             0.4,
-          spanGaps:            true,
-        },
-      ],
-    },
-    options: {
-      responsive:          true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 2000,
-        easing:   'easeInOutQuart',
-      },
-      interaction: {
-        mode:      'index',
-        intersect: false,
-      },
-      plugins: {
-        legend: {
-          display:  true,
-          position: 'bottom',
-          labels: {
-            color:     '#888888',
-            font:      { family: 'Inter', size: isMobile ? 11 : 12 },
-            boxWidth:  14,
-            padding:   20,
-          },
-        },
-        tooltip: {
-          backgroundColor: 'rgba(20,20,20,0.95)',
-          borderColor:     'rgba(255,215,0,0.3)',
-          borderWidth:     1,
-          titleColor:      '#FFD700',
-          bodyColor:       '#FFFFFF',
-          padding:         12,
-          titleFont:       { family: 'Bebas Neue', size: isMobile ? 14 : 16 },
-          bodyFont:        { family: 'Inter', size: isMobile ? 12 : 13 },
-          callbacks: {
-            title: (items) => items[0].label,
-            label: (item) => {
-              if (item.datasetIndex === 1 && item.raw === null) return null;
-              const notas = {
-                '2020': '🚀 Explosión de mercado',
-                '2021': '⚡ +151%: de 40M a 100M',
-                '2022': 'Ajuste post-pandemia',
-                '2023': 'Ajuste de mercado',
-                '2024': 'Recuperación',
-                '2025': '★ Récord histórico',
-                '2026': '⟶ Objetivo: 120M unidades',
-              };
-              const nota = notas[item.label] ? `  ${notas[item.label]}` : '';
-              return ` ${item.raw}M latas${nota}`;
-            },
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color:   '#888888',
-            font:    { family: 'Inter', size: isMobile ? 10 : 12 },
-            maxTicksLimit: isMobile ? 6 : 12,
-          },
-          grid: {
-            color: 'rgba(255,255,255,0.04)',
-          },
-        },
-        y: {
-          ticks: {
-            color:     '#888888',
-            font:      { family: 'Inter', size: isMobile ? 10 : 12 },
-            callback:  (v) => v + 'M',
-            maxTicksLimit: 7,
-          },
-          grid: {
-            color: 'rgba(255,255,255,0.05)',
-          },
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+  container.appendChild(svg);
+
+  /* ── Animación: barras crecen de abajo hacia arriba ─── */
+  const startTs = performance.now();
+  const DURATION = 1100;
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function animate(ts) {
+    let running = false;
+
+    barItems.forEach(({ rect, valText, badge, finalH, delay }) => {
+      const elapsed  = ts - startTs - delay;
+      if (elapsed <= 0) { running = true; return; }
+
+      const progress = Math.min(1, elapsed / DURATION);
+      const eased    = easeOutCubic(progress);
+      const h        = finalH * eased;
+
+      rect.setAttribute('y',      BOTTOM - h);
+      rect.setAttribute('height', h);
+
+      /* Fade in del valor al 75% de la animación */
+      if (progress >= 0.75) {
+        const a = Math.min(1, (progress - 0.75) / 0.25);
+        valText.setAttribute('opacity', a.toFixed(3));
+        if (badge) badge.setAttribute('opacity', a.toFixed(3));
+      }
+
+      if (progress < 1) running = true;
+    });
+
+    if (running) requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
 }
 
 
 /* ────────────────────────────────────────────────────────────
-   5. CONTADORES KPI (via data-counter, ya manejados por core.js)
-   Aquí solo se sobreescriben configuraciones específicas si
-   fuera necesario.
+   5. CONTADORES KPI (via data-counter, manejados por core.js)
    ──────────────────────────────────────────────────────────── */
 // Los contadores usan data-counter="VALUE" + data-counter-* en el HTML.
 // core.js los inicializa automáticamente vía DOMContentLoaded.
 
 
 /* ────────────────────────────────────────────────────────────
-   6. RESIZE — actualizar Chart.js en responsive
+   6. RESIZE — recalcular barras consumo en responsive
    ──────────────────────────────────────────────────────────── */
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
-    // Chart.js maneja su propio resize; solo recalcular las barras
     animarBarrasConsumo();
   }, 200);
 });

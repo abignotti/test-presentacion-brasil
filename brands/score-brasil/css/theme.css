@@ -93,57 +93,6 @@
   margin-bottom: 8px;
 }
 
-/* ── Fotos reales de latas en portafolio ──────────────────── */
-.lata-foto {
-  height: clamp(200px, 22vw, 280px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(ellipse 70% 80% at 50% 50%,
-    rgba(255,215,0,0.06) 0%, transparent 70%);
-  padding: clamp(16px, 2vw, 28px);
-  overflow: hidden;
-}
-
-.lata-foto img {
-  height: 100%;
-  width: auto;
-  object-fit: contain;
-  transition: transform 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
-}
-
-.producto-card:hover .lata-foto img {
-  transform: scale(1.06) translateY(-4px);
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.7));
-}
-
-/* Dos latas en la card de Innovación */
-.lata-foto--duo {
-  gap: clamp(8px, 2vw, 16px);
-  padding: clamp(12px, 2vw, 20px);
-}
-
-.lata-foto--duo img {
-  height: 90%;
-}
-
-.lata-foto__left {
-  transform: rotate(-6deg) translateX(6px);
-}
-
-.lata-foto__right {
-  transform: rotate(6deg) translateX(-6px);
-}
-
-.producto-card:hover .lata-foto__left {
-  transform: rotate(-8deg) translateX(4px) scale(1.04) translateY(-4px) !important;
-}
-
-.producto-card:hover .lata-foto__right {
-  transform: rotate(8deg) translateX(-4px) scale(1.04) translateY(-4px) !important;
-}
-
 /* ============================================================
    SECCIÓN 2 — GRÁFICO DE CRECIMIENTO
    ============================================================ */
@@ -163,10 +112,16 @@
   box-shadow: 0 0 48px rgba(255, 215, 0, 0.05);
 }
 
-.chart-canvas-container {
+.chart-svg-wrap {
   position: relative;
-  height: clamp(220px, 35vw, 380px);
   width: 100%;
+  /* El SVG define su propio alto via viewBox — no necesita altura fija */
+}
+
+.chart-svg-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Hitos debajo del gráfico */
